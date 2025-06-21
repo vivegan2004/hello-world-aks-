@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+  labels:
+    app: hello-world
+spec:
+  # Selects pods with the label 'app: hello-world' to route traffic to
+  selector:
+    app: hello-world
+  ports:
+    - protocol: TCP
+      port: 80        # The external port for the Load Balancer
+      targetPort: 5000 # The internal port of your application container
+  type: LoadBalancer  # This will provision a public IP Load Balancer in Azure AKS
