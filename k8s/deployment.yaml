@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+  labels:
+    app: hello-world
+spec:
+  # Ensure 3 replicas (pods) are always running
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+      - name: hello-world-app
+        # This image will be updated by the pipeline during the build phase
+        # It will be in the format: <your-acr-name>.azurecr.io/hello-world-app:$(Build.BuildId)
+        image: REPLACE_IMAGE_WITH_ACR_PATH:REPLACE_IMAGE_TAG
+        ports:
+        - containerPort: 5000 # Your Flask app runs on port 5000
+        env: # Optional: Environment variable for the message
+        - name: HELLO_MESSAGE
+          value: "Hello from Kubernetes! Version 1.0"
