@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Docker
+*.log
+*.tar
+.dockerignore
+
+# Environment variables
+.env
+.venv
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Azure DevOps artifacts (if run locally)
+_artifact/
